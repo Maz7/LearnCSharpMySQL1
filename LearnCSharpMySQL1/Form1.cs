@@ -51,6 +51,9 @@ namespace LearnCSharpMySQL1
                 if(i == 1)
                 {
                     MessageBox.Show("Successful");
+                    this.Hide();
+                    Form2 f2 = new Form2();
+                    f2.ShowDialog();
                 }
                 else if(i > 1){
                     MessageBox.Show("Multiple accounts");
