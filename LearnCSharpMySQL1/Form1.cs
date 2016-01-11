@@ -18,21 +18,41 @@ namespace LearnCSharpMySQL1
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        
+        private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
                 string mycon = "datasource=localhost;port=3306;username=root;Password=2557";
                 MySqlConnection con = new MySqlConnection(mycon);
-                MySqlDataAdapter adp = new MySqlDataAdapter();
-                adp.SelectCommand = new MySqlCommand("SELECT * database.EmployeeInfo",con);
-                //MySqlCommandBuilder cb = new MySqlCommandBuilder(adp);
+                
+                MySqlCommand command = new MySqlCommand("SELECT * from database.players where username='" + username.Text +
+                    "' and password='" + password.Text +  "' ;", con);
 
+                MySqlDataReader reader;
                 con.Open();
+                reader = command.ExecuteReader();
 
-                MessageBox.Show("connected");
+                int i = 0;
+                while(reader.Read())
+                {
+                    i = i + 1;
+                }
 
+                if(i == 1)
+                {
+                    MessageBox.Show("Successful");
+                }
+                else if(i > 1){
+                    MessageBox.Show("Multiple accounts");
+                }
+                else
+                {
+                    MessageBox.Show("Can't connect");
+                }
+               
                 con.Close();
+                reader.Close();
 
             }
             catch (Exception ex)
