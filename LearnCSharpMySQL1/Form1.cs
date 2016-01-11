@@ -16,17 +16,26 @@ namespace LearnCSharpMySQL1
         public Form1()
         {
             InitializeComponent();
+            password.PasswordChar = '*';
+            password.MaxLength = 20;
         }
 
         
         private void button1_Click_1(object sender, EventArgs e)
         {
+            if (username.Text.Equals("") || password.Text.Equals(""))
+            {
+                MessageBox.Show("Field empty");
+            }
+
+                String userN = username.Text.Trim();
+            
             try
             {
                 string mycon = "datasource=localhost;port=3306;username=root;Password=2557";
                 MySqlConnection con = new MySqlConnection(mycon);
                 
-                MySqlCommand command = new MySqlCommand("SELECT * from database.players where username='" + username.Text +
+                MySqlCommand command = new MySqlCommand("SELECT * from database.players where username='" + userN +
                     "' and password='" + password.Text +  "' ;", con);
 
                 MySqlDataReader reader;
