@@ -44,5 +44,27 @@ namespace LearnCSharpMySQL1
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string mycon = "datasource=localhost;port=3306;username=root;Password=2557";
+            string Query = "UPDATE database.players SET idPlayers='"+this.id.Text+"',UserName='"+user.Text+"',Password='"+pass.Text+"',Goals='"+ goal.Text+"',Assist='"+assist.Text+"' where idPlayers='" + this.id.Text + "' ;";
+
+            MySqlConnection con = new MySqlConnection(mycon);
+            MySqlCommand cmd = new MySqlCommand(Query, con);
+            MySqlDataReader myReader;
+
+            try
+            {
+                con.Open();
+                myReader = cmd.ExecuteReader();
+                MessageBox.Show("Saved");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
