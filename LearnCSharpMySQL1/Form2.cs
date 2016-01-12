@@ -98,7 +98,37 @@ namespace LearnCSharpMySQL1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            id.Text = comboBox1.Text;
+            string mycon = "datasource=localhost;port=3306;username=root;Password=2557";
+            string Query = "SELECT * FROM database.players WHERE UserName= '"+ comboBox1.Text +"';";
+
+            MySqlConnection con = new MySqlConnection(mycon);
+            MySqlCommand cmd = new MySqlCommand(Query, con);
+            MySqlDataReader myReader;
+
+            try
+            {
+                con.Open();
+                myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    int idP = myReader.GetInt32("idPlayers");
+                    String user1 = myReader.GetString("UserName");
+                    String pass1 = myReader.GetString("Password");
+                    int goals1 = myReader.GetInt32("Goals");
+                    int assist1 = myReader.GetInt32("Assist");
+
+                    id.Text = idP.ToString();
+                    user.Text = user1;
+                    pass.Text = pass1;
+                    goal.Text = goals1.ToString();
+                    assist.Text = assist1.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void fillCombo()
