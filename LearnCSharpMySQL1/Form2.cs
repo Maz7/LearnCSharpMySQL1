@@ -17,6 +17,7 @@ namespace LearnCSharpMySQL1
         {
             InitializeComponent();
             fillCombo();
+            timer1.Start();
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -190,6 +191,12 @@ namespace LearnCSharpMySQL1
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            this.label6.Text = dt.ToString();
         }
     }
 }
