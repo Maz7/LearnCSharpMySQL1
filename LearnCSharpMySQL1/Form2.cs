@@ -156,5 +156,40 @@ namespace LearnCSharpMySQL1
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void fill_listbox()
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string mycon = "datasource=localhost;port=3306;username=root;Password=2557";
+            string Query = "SELECT UserName,Assist,Goals FROM database.players;";
+
+            MySqlConnection con = new MySqlConnection(mycon);
+            MySqlCommand cmd = new MySqlCommand(Query, con);
+           // MySqlDataReader myReader;
+
+            try
+            {
+                MySqlDataAdapter sda = new MySqlDataAdapter();
+                sda.SelectCommand = cmd;
+                DataTable dataset = new DataTable();
+                sda.Fill(dataset);
+
+                BindingSource bs = new BindingSource();
+
+                bs.DataSource = dataset;
+                dataGridView1.DataSource = bs;
+                sda.Update(dataset);
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
