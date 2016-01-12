@@ -198,5 +198,20 @@ namespace LearnCSharpMySQL1
             DateTime dt = DateTime.Now;
             this.label6.Text = dt.ToString();
         }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dia = MessageBox.Show("Are you sure you want to exit application?", "Exit", MessageBoxButtons.YesNo);
+
+            if(dia == DialogResult.Yes)
+            {
+                Application.ExitThread();
+                //Application.Exit();
+            }
+            else if(dia == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
