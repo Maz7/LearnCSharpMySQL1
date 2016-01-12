@@ -88,5 +88,16 @@ namespace LearnCSharpMySQL1
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            String namestr = user.Text;
+            comboBox1.Items.Add(namestr);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            id.Text = comboBox1.Text;
+        }
     }
 }
