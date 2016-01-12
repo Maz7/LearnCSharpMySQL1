@@ -16,6 +16,7 @@ namespace LearnCSharpMySQL1
         public Form2()
         {
             InitializeComponent();
+            fillCombo();
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -98,6 +99,32 @@ namespace LearnCSharpMySQL1
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             id.Text = comboBox1.Text;
+        }
+
+        public void fillCombo()
+        {
+            string mycon = "datasource=localhost;port=3306;username=root;Password=2557";
+            string Query = "SELECT * FROM database.players;" ;
+
+            MySqlConnection con = new MySqlConnection(mycon);
+            MySqlCommand cmd = new MySqlCommand(Query, con);
+            MySqlDataReader myReader;
+
+            try
+            {
+                con.Open();
+                myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    String str = myReader.GetString("UserName");
+                    comboBox1.Items.Add(str);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
